@@ -1,3 +1,3 @@
-# GeoXQuery
+# GPXQuery
 
-A collection of XQuery utility functions for geospatial data formats.
+A collection of XQuery utility functions for the GPX file format.
