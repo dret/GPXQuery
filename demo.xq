@@ -13,12 +13,14 @@ declare variable $GPX := doc('demo.gpx')/gpx:gpx;
                 <th>Nr.</th>
                 <th>Name</th>
                 <th>Segments</th>
+                <th>Points</th>
             </tr>
             { for $trk in 1 to gpxquery:trk-count($GPX) return
                 <tr>
                     <td> { $trk } </td>
                     <td> { gpxquery:trk-names($GPX)[$trk] } </td>
                     <td> { gpxquery:trk-segments($GPX)[$trk] } </td>
+                    <td> { gpxquery:trk-points($GPX)[$trk] } </td>
                 </tr>
             }
         </table>
