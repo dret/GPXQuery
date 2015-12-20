@@ -19,3 +19,10 @@ declare function gpxquery:trk-name($gpx as element(gpx:gpx))
 {
     $gpx/gpx:trk/gpx:name/text()
 };
+
+declare function gpxquery:trk-segment($gpx as element(gpx:gpx))
+    as xsd:integer*
+{
+    for $trk in 1 to count($gpx/gpx:trk)
+    return count($gpx/gpx:trk[$trk]/gpx:trkseg)
+};
