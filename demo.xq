@@ -17,6 +17,7 @@ declare variable $dateTime-format := "[MNn] [D], [Y]; [H]:[m]:[s] [z]";
                 <th>Points</th>
                 <th>Start Time</th>
                 <th>End Time</th>
+                <th>Duration</th>
             </tr>
             { for $trk in 1 to gpxquery:trk-count($GPX) return
                 <tr>
@@ -25,6 +26,7 @@ declare variable $dateTime-format := "[MNn] [D], [Y]; [H]:[m]:[s] [z]";
                     <td> { gpxquery:trk-segments($GPX)[$trk] } </td>
                     <td> { fn:format-dateTime(gpxquery:trk-start($GPX)[$trk], $dateTime-format) } </td>
                     <td> { fn:format-dateTime(gpxquery:trk-end($GPX)[$trk],   $dateTime-format) } </td>
+                    <td> { gpxquery:trk-end($GPX)[$trk] - gpxquery:trk-start($GPX)[$trk] } </td>
                 </tr>
             }
         </table>
