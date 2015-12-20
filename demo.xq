@@ -3,6 +3,7 @@ import module namespace gpxquery = "https://github.com/dret/GPXQuery" at "GPXQue
 declare namespace gpx = "http://www.topografix.com/GPX/1/1";
 
 declare variable $GPX := doc('demo.gpx')/gpx:gpx;
+declare variable $dateTime-format := "[MNn] [D], [Y]; [H]:[m]:[s] [z]";
 
 <html>
     <head><title>GPXQuery Demo</title></head>
@@ -22,8 +23,8 @@ declare variable $GPX := doc('demo.gpx')/gpx:gpx;
                     <td> { $trk } </td>
                     <td> { gpxquery:trk-names($GPX)[$trk] } </td>
                     <td> { gpxquery:trk-segments($GPX)[$trk] } </td>
-                    <td> { gpxquery:trk-start($GPX)[$trk] } </td>
-                    <td> { gpxquery:trk-end($GPX)[$trk] } </td>
+                    <td> { fn:format-dateTime(gpxquery:trk-start($GPX)[$trk], $dateTime-format) } </td>
+                    <td> { fn:format-dateTime(gpxquery:trk-end($GPX)[$trk],   $dateTime-format) } </td>
                 </tr>
             }
         </table>
