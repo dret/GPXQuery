@@ -14,13 +14,13 @@ declare function gpxquery:trk-count($gpx as element(gpx:gpx))
     count($gpx/gpx:trk)
 };
 
-declare function gpxquery:trk-name($gpx as element(gpx:gpx))
+declare function gpxquery:trk-names($gpx as element(gpx:gpx))
     as xsd:string*
 {
     $gpx/gpx:trk/gpx:name/text()
 };
 
-declare function gpxquery:trk-segment($gpx as element(gpx:gpx))
+declare function gpxquery:trk-segments($gpx as element(gpx:gpx))
     as xsd:integer*
 {
     for $trk in 1 to count($gpx/gpx:trk)
