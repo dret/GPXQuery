@@ -38,3 +38,10 @@ declare function gpxquery:trk-start($gpx as element(gpx:gpx))
     for $trk in 1 to count($gpx/gpx:trk)
         return $gpx/gpx:trk[$trk]/gpx:trkseg[1]/gpx:trkpt[1]/gpx:time/text()
 };
+
+declare function gpxquery:trk-end($gpx as element(gpx:gpx))
+    as xsd:dateTime*
+{
+    for $trk in 1 to count($gpx/gpx:trk)
+        return $gpx/gpx:trk[$trk]/gpx:trkseg[last()]/gpx:trkpt[last()]/gpx:time/text()
+};

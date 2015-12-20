@@ -15,6 +15,7 @@ declare variable $GPX := doc('demo.gpx')/gpx:gpx;
                 <th>Segments</th>
                 <th>Points</th>
                 <th>Start Time</th>
+                <th>End Time</th>
             </tr>
             { for $trk in 1 to gpxquery:trk-count($GPX) return
                 <tr>
@@ -22,6 +23,7 @@ declare variable $GPX := doc('demo.gpx')/gpx:gpx;
                     <td> { gpxquery:trk-names($GPX)[$trk] } </td>
                     <td> { gpxquery:trk-segments($GPX)[$trk] } </td>
                     <td> { gpxquery:trk-start($GPX)[$trk] } </td>
+                    <td> { gpxquery:trk-end($GPX)[$trk] } </td>
                 </tr>
             }
         </table>
