@@ -16,8 +16,7 @@ declare variable $dateTime-format := "[MNn] [D], [Y]; [H]:[m]:[s] [z]";
             <tr>
                 <th>Nr.</th>
                 <th>Name</th>
-                <th>Segments</th>
-                <th>Points</th>
+                <th>Segments<br/>Points</th>
                 <th>Distance (m)</th>
                 <th>Ascent (m)</th>
                 <th>Descent (m)</th>
@@ -29,8 +28,7 @@ declare variable $dateTime-format := "[MNn] [D], [Y]; [H]:[m]:[s] [z]";
                 <tr>
                     <td> { $trk } </td>
                     <td> { gpxquery:trk-names($GPX)[$trk] } </td>
-                    <td> { gpxquery:trk-segments($GPX)[$trk] } </td>
-                    <td> { gpxquery:trk-points($GPX)[$trk] } </td>
+                    <td> { gpxquery:trk-segments($GPX)[$trk] } / { gpxquery:trk-points($GPX)[$trk] } </td>
                     <td> { gpxquery:trk-distance($GPX)[$trk] } </td>
                     <td> { gpxquery:trk-ascent($GPX)[$trk] } </td>
                     <td> { gpxquery:trk-descent($GPX)[$trk] } </td>
