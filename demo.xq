@@ -18,11 +18,12 @@ declare variable $dateTime-format := "[MNn] [D], [Y]; [H]:[m]:[s] [z]";
                 <th>Name</th>
                 <th>Segments</th>
                 <th>Points</th>
+                <th>Distance (m)</th>
+                <th>Ascent (m)</th>
+                <th>Descent (m)</th>
                 <th>Start Time</th>
                 <th>End Time</th>
                 <th>Duration</th>
-                <th>Ascent (m)</th>
-                <th>Descent (m)</th>
             </tr>
             { for $trk in 1 to gpxquery:trk-count($GPX) return
                 <tr>
@@ -30,11 +31,12 @@ declare variable $dateTime-format := "[MNn] [D], [Y]; [H]:[m]:[s] [z]";
                     <td> { gpxquery:trk-names($GPX)[$trk] } </td>
                     <td> { gpxquery:trk-segments($GPX)[$trk] } </td>
                     <td> { gpxquery:trk-points($GPX)[$trk] } </td>
+                    <td> { gpxquery:trk-distance($GPX)[$trk] } </td>
+                    <td> { gpxquery:trk-ascent($GPX)[$trk] } </td>
+                    <td> { gpxquery:trk-descent($GPX)[$trk] } </td>
                     <td> { fn:format-dateTime(gpxquery:trk-start($GPX)[$trk], $dateTime-format) } </td>
                     <td> { fn:format-dateTime(  gpxquery:trk-end($GPX)[$trk], $dateTime-format) } </td>
                     <td> { gpxquery:trk-end($GPX)[$trk] - gpxquery:trk-start($GPX)[$trk] } </td>
-                    <td> { gpxquery:trk-ascent($GPX)[$trk] } </td>
-                    <td> { gpxquery:trk-descent($GPX)[$trk] } </td>
                 </tr>
             }
         </table>
