@@ -6,6 +6,9 @@ declare namespace math = "http://www.w3.org/2005/xpath-functions/math";
 declare namespace gpx = "http://www.topografix.com/GPX/1/1";
 declare namespace gpxtpx = "http://www.garmin.com/xmlschemas/TrackPointExtension/v1";
 
+declare variable $gpxquery:earth-radius := 6371000.0;
+declare variable $gpxquery:pi := xs:float(math:pi());
+
 declare function gpxquery:trk-count($gpx as element(gpx:gpx))
     as xsd:integer
 {
@@ -56,12 +59,12 @@ declare function gpxquery:trk-ascent($gpx as element(gpx:gpx))
 declare function gpxquery:trk-ascent-recurse($eles as xsd:float*)
     as xsd:float*
 {
-        if ( count($eles) le 1 )
-          then 0
-          else (
-              if ( ($eles[2] - $eles[1]) gt 0.0 ) then $eles[2] - $eles[1] else 0.0 ,
-              gpxquery:trk-ascent-recurse($eles[position() gt 1])
-          )
+    if ( count($eles) le 1 )
+      then 0
+      else (
+          if ( ($eles[2] - $eles[1]) gt 0.0 ) then $eles[2] - $eles[1] else 0.0 ,
+          gpxquery:trk-ascent-recurse($eles[position() gt 1])
+      )
 };
 
 declare function gpxquery:trk-descent($gpx as element(gpx:gpx))
@@ -74,10 +77,40 @@ declare function gpxquery:trk-descent($gpx as element(gpx:gpx))
 declare function gpxquery:trk-descent-recurse($eles as xsd:float*)
     as xsd:float*
 {
-        if ( count($eles) le 1 )
-          then 0
-          else (
-              if ( ($eles[1] - $eles[2]) gt 0.0 ) then $eles[1] - $eles[2] else 0.0 ,
-              gpxquery:trk-descent-recurse($eles[position() gt 1])
-          )
+    if ( count($eles) le 1 )
+      then 0
+      else (
+          if ( ($eles[1] - $eles[2]) gt 0.0 ) then $eles[1] - $eles[2] else 0.0 ,
+          gpxquery:trk-descent-recurse($eles[position() gt 1])
+      )
+};
+
+declare function gpxquery:trk-distance($gpx as element(gpx:gpx))
+    as xsd:float*
+{
+    for $trk in 1 to count($gpx/gpx:trk)
+        return sum(gpxquery:trk-distance-recurse($gpx/gpx:trk[$trk]/gpx:trkseg/gpx:trkpt))
+};
+
+declare function gpxquery:trk-distance-recurse($trkpts as element(gpx:trkpt)*)
+    as xsd:float*
+{
+    if ( count($trkpts) le 1 )
+      then 0
+      else (
+          gpxquery:distance-between-points($trkpts[1]/@lat, $trkpts[1]/@lon, $trkpts[2]/@lat, $trkpts[2]/@lon) ,
+          gpxquery:trk-distance-recurse($trkpts[position() gt 1])
+      )
+};
+
+declare function gpxquery:distance-between-points($lat1 as xsd:float, $lon1 as xsd:float, $lat2 as xsd:float, $lon2 as xsd:float)
+    as xsd:float
+{
+    let $dlat  := ($lat2 - $lat1) * $gpxquery:pi div 180
+    let $dlon  := ($lon2 - $lon1) * $gpxquery:pi div 180
+    let $rlat1 := $lat1 * $gpxquery:pi div 180
+    let $rlat2 := $lat2 * $gpxquery:pi div 180
+    let $a     := math:sin($dlat div 2) * math:sin($dlat div 2) + math:sin($dlon div 2) * math:sin($dlon div 2) * math:cos($rlat1) * math:cos($rlat2)
+    let $c     := 2 * math:atan2(math:sqrt($a), math:sqrt(1-$a))
+    return xsd:float($c * $gpxquery:earth-radius)
 };
