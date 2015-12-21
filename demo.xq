@@ -6,9 +6,12 @@ declare variable $GPX := doc('demo.gpx')/gpx:gpx;
 declare variable $dateTime-format := "[MNn] [D], [Y]; [H]:[m]:[s] [z]";
 
 <html>
-    <head><title>GPXQuery Demo</title></head>
+    <head>
+        <title>GPXQuery Demo</title>
+        <style>th, td {{ padding: 5px; border: 1px solid gray ; }} </style>
+    </head>
     <body>
-        <h1>GPX Track Information</h1>
+        <h1>GPXQuery Demo: GPX Track Information</h1>
         <table>
             <tr>
                 <th>Nr.</th>
