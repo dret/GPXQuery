@@ -45,3 +45,39 @@ declare function gpxquery:trk-end($gpx as element(gpx:gpx))
     for $trk in 1 to count($gpx/gpx:trk)
         return $gpx/gpx:trk[$trk]/gpx:trkseg[last()]/gpx:trkpt[last()]/gpx:time/text()
 };
+
+declare function gpxquery:trk-ascent($gpx as element(gpx:gpx))
+    as xsd:float*
+{
+    for $trk in 1 to count($gpx/gpx:trk)
+        return sum(gpxquery:trk-ascent-recurse($gpx/gpx:trk[$trk]/gpx:trkseg/gpx:trkpt/gpx:ele/text()))
+};
+
+declare function gpxquery:trk-ascent-recurse($eles as xsd:float*)
+    as xsd:float*
+{
+        if ( count($eles) le 1 )
+          then 0
+          else (
+              if ( ($eles[2] - $eles[1]) gt 0.0 ) then $eles[2] - $eles[1] else 0.0 ,
+              gpxquery:trk-ascent-recurse($eles[position() gt 1])
+          )
+};
+
+declare function gpxquery:trk-descent($gpx as element(gpx:gpx))
+    as xsd:float*
+{
+    for $trk in 1 to count($gpx/gpx:trk)
+        return -1 * sum(gpxquery:trk-descent-recurse($gpx/gpx:trk[$trk]/gpx:trkseg/gpx:trkpt/gpx:ele/text()))
+};
+
+declare function gpxquery:trk-descent-recurse($eles as xsd:float*)
+    as xsd:float*
+{
+        if ( count($eles) le 1 )
+          then 0
+          else (
+              if ( ($eles[2] - $eles[1]) lt 0.0 ) then $eles[2] - $eles[1] else 0.0 ,
+              gpxquery:trk-descent-recurse($eles[position() gt 1])
+          )
+};
