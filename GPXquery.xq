@@ -68,7 +68,7 @@ declare function gpxquery:trk-descent($gpx as element(gpx:gpx))
     as xsd:float*
 {
     for $trk in 1 to count($gpx/gpx:trk)
-        return -1 * sum(gpxquery:trk-descent-recurse($gpx/gpx:trk[$trk]/gpx:trkseg/gpx:trkpt/gpx:ele/text()))
+        return sum(gpxquery:trk-descent-recurse($gpx/gpx:trk[$trk]/gpx:trkseg/gpx:trkpt/gpx:ele/text()))
 };
 
 declare function gpxquery:trk-descent-recurse($eles as xsd:float*)
@@ -77,7 +77,7 @@ declare function gpxquery:trk-descent-recurse($eles as xsd:float*)
         if ( count($eles) le 1 )
           then 0
           else (
-              if ( ($eles[2] - $eles[1]) lt 0.0 ) then $eles[2] - $eles[1] else 0.0 ,
+              if ( ($eles[1] - $eles[2]) gt 0.0 ) then $eles[1] - $eles[2] else 0.0 ,
               gpxquery:trk-descent-recurse($eles[position() gt 1])
           )
 };
