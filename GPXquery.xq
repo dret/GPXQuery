@@ -7,7 +7,6 @@ declare namespace gpx = "http://www.topografix.com/GPX/1/1";
 declare namespace gpxtpx = "http://www.garmin.com/xmlschemas/TrackPointExtension/v1";
 
 declare variable $gpxquery:earth-radius := 6371000.0;
-declare variable $gpxquery:pi := xs:float(math:pi());
 
 declare function gpxquery:trk-count($gpx as element(gpx:gpx))
     as xsd:integer
@@ -106,10 +105,10 @@ declare function gpxquery:trk-distance-recurse($trkpts as element(gpx:trkpt)*)
 declare function gpxquery:distance-between-points($lat1 as xsd:float, $lon1 as xsd:float, $lat2 as xsd:float, $lon2 as xsd:float)
     as xsd:float
 {
-    let $dlat  := ($lat2 - $lat1) * $gpxquery:pi div 180
-    let $dlon  := ($lon2 - $lon1) * $gpxquery:pi div 180
-    let $rlat1 := $lat1 * $gpxquery:pi div 180
-    let $rlat2 := $lat2 * $gpxquery:pi div 180
+    let $dlat  := ($lat2 - $lat1) * math:pi() div 180
+    let $dlon  := ($lon2 - $lon1) * math:pi() div 180
+    let $rlat1 := $lat1 * math:pi() div 180
+    let $rlat2 := $lat2 * math:pi() div 180
     let $a     := math:sin($dlat div 2) * math:sin($dlat div 2) + math:sin($dlon div 2) * math:sin($dlon div 2) * math:cos($rlat1) * math:cos($rlat2)
     let $c     := 2 * math:atan2(math:sqrt($a), math:sqrt(1-$a))
     return xsd:float($c * $gpxquery:earth-radius)
