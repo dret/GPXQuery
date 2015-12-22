@@ -19,8 +19,8 @@ declare variable $dateTime-format := "[MNn] [D], [Y]; [H]:[m]:[s] [z]";
                 <th>Name</th>
                 <th>Segments/<br/>Points</th>
                 <th>Distance<br/>(km)</th>
-                <th>Ascent<br/>(m)</th>
-                <th>Descent<br/>(m)</th>
+                <th>Ascent (m)/<br/>Descent (m)</th>
+                <th>Min. Elevation (m)/<br/>Max. Elevation (m)</th>
                 <th>Start Time</th>
                 <th>End Time</th>
                 <th>Duration</th>
@@ -32,8 +32,8 @@ declare variable $dateTime-format := "[MNn] [D], [Y]; [H]:[m]:[s] [z]";
                     <td> { gpxquery:trk-names($GPX)[$trk] } </td>
                     <td> { gpxquery:trk-segments($GPX)[$trk] } / { gpxquery:trk-points($GPX)[$trk] } </td>
                     <td> { xsd:int(gpxquery:trk-distance($GPX)[$trk]) div 1000 } </td>
-                    <td> { xsd:int(gpxquery:trk-ascent($GPX)[$trk]) } </td>
-                    <td> { xsd:int(gpxquery:trk-descent($GPX)[$trk]) } </td>
+                    <td> { xsd:int(gpxquery:trk-ascent($GPX)[$trk]) } / { xsd:int(gpxquery:trk-descent($GPX)[$trk]) } </td>
+                    <td> { xsd:int(gpxquery:trk-min-elevation($GPX)[$trk]) } / { xsd:int(gpxquery:trk-max-elevation($GPX)[$trk]) } </td>
                     <td> { fn:format-dateTime(gpxquery:trk-start($GPX)[$trk], $dateTime-format) } </td>
                     <td> { fn:format-dateTime(  gpxquery:trk-end($GPX)[$trk], $dateTime-format) } </td>
                     <td> { gpxquery:trk-end($GPX)[$trk] - gpxquery:trk-start($GPX)[$trk] } </td>

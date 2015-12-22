@@ -46,6 +46,20 @@ declare function gpxquery:trk-end($gpx as element(gpx:gpx))
     return $gpx/gpx:trk[$trk]/gpx:trkseg[last()]/gpx:trkpt[last()]/gpx:time/text()
 };
 
+declare function gpxquery:trk-min-elevation($gpx as element(gpx:gpx))
+    as xsd:double*
+{
+    for $trk in 1 to count($gpx/gpx:trk)
+    return min($gpx/gpx:trk[$trk]/gpx:trkseg/gpx:trkpt/gpx:ele/text())
+};
+
+declare function gpxquery:trk-max-elevation($gpx as element(gpx:gpx))
+    as xsd:double*
+{
+    for $trk in 1 to count($gpx/gpx:trk)
+    return max($gpx/gpx:trk[$trk]/gpx:trkseg/gpx:trkpt/gpx:ele/text())
+};
+
 declare function gpxquery:trk-ascent($gpx as element(gpx:gpx))
     as xsd:double*
 {
