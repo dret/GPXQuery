@@ -97,12 +97,12 @@ declare function gpxquery:trk-distance-recurse($trkpts as element(gpx:trkpt)*)
     if ( count($trkpts) le 1 )
       then 0
       else (
-          gpxquery:distance-between-points($trkpts[1]/@lat, $trkpts[1]/@lon, $trkpts[2]/@lat, $trkpts[2]/@lon) ,
+          gpxquery:haversine($trkpts[1]/@lat, $trkpts[1]/@lon, $trkpts[2]/@lat, $trkpts[2]/@lon) ,
           gpxquery:trk-distance-recurse($trkpts[position() gt 1])
       )
 };
 
-declare function gpxquery:distance-between-points($lat1 as xsd:float, $lon1 as xsd:float, $lat2 as xsd:float, $lon2 as xsd:float)
+declare function gpxquery:haversine($lat1 as xsd:float, $lon1 as xsd:float, $lat2 as xsd:float, $lon2 as xsd:float)
     as xsd:float
 {
     (: This is the Haversine formula as described by http://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates :)
