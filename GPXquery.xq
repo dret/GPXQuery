@@ -93,3 +93,16 @@ declare function gpxquery:haversine($lat1 as xsd:double, $lon1 as xsd:double, $l
     let $c     := 2 * math:atan2(math:sqrt($a), math:sqrt(1-$a))
     return xsd:double($c * 6371000.0)
 };
+
+declare function gpxquery:bbox($gpx as element(gpx:gpx), $trk as xsd:integer)
+    as xsd:double+
+{
+    let $trkpts := $gpx/gpx:trk[$trk]/gpx:trkseg/gpx:trkpt
+    return (
+        min($trkpts/@lat),
+        min($trkpts/@lon),
+        max($trkpts/@lat),
+        max($trkpts/@lon)
+    )
+};
+

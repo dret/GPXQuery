@@ -24,6 +24,7 @@ declare variable $dateTime-format := "[MNn] [D], [Y]; [H]:[m]:[s] [z]";
                 <th>Start Time</th>
                 <th>End Time</th>
                 <th>Duration</th>
+                <th>Bounding Box</th>
             </tr>
             { for $trk in 1 to gpxquery:trk-count($GPX) return
                 <tr>
@@ -36,6 +37,10 @@ declare variable $dateTime-format := "[MNn] [D], [Y]; [H]:[m]:[s] [z]";
                     <td> { fn:format-dateTime(gpxquery:trk-start($GPX)[$trk], $dateTime-format) } </td>
                     <td> { fn:format-dateTime(  gpxquery:trk-end($GPX)[$trk], $dateTime-format) } </td>
                     <td> { gpxquery:trk-end($GPX)[$trk] - gpxquery:trk-start($GPX)[$trk] } </td>
+                    <td> { let $bbox := gpxquery:bbox($GPX, $trk) return
+                           <a href="http://mvjantzen.com/tools/map.php?width=900&amp;height=600&amp;top={$bbox[1]}&amp;left={$bbox[2]}&amp;bottom={$bbox[3]}&amp;right={$bbox[4]}" title="{$bbox}">Map</a>
+                         }
+                    </td>
                 </tr>
             }
         </table>
