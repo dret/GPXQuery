@@ -95,7 +95,7 @@ declare function gpxquery:haversine($lat1 as xsd:double, $lon1 as xsd:double, $l
 };
 
 declare function gpxquery:bbox($gpx as element(gpx:gpx), $trk as xsd:integer)
-    as xsd:double+
+    as xsd:double+ (: Return values are 4 xsd:double for the bounding box coordinates, first lat/lon of lower left, then lat/lon of upper right. :)
 {
     let $trkpts := $gpx/gpx:trk[$trk]/gpx:trkseg/gpx:trkpt
     return (
