@@ -17,10 +17,10 @@ declare variable $dateTime-format := "[MNn] [D], [Y]; [H]:[m]:[s] [z]";
             <tr>
                 <th>Nr.</th>
                 <th>Name</th>
-                <th>Segments<br/>Points</th>
-                <th>Distance (km)</th>
-                <th>Ascent (m)</th>
-                <th>Descent (m)</th>
+                <th>Segments/<br/>Points</th>
+                <th>Distance<br/>(km)</th>
+                <th>Ascent<br/>(m)</th>
+                <th>Descent<br/>(m)</th>
                 <th>Start Time</th>
                 <th>End Time</th>
                 <th>Duration</th>
