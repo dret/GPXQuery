@@ -6,8 +6,6 @@ declare namespace math = "http://www.w3.org/2005/xpath-functions/math";
 declare namespace gpx = "http://www.topografix.com/GPX/1/1";
 declare namespace gpxtpx = "http://www.garmin.com/xmlschemas/TrackPointExtension/v1";
 
-declare variable $gpxquery:earth-radius := 6371000.0;
-
 declare function gpxquery:trk-count($gpx as element(gpx:gpx))
     as xsd:integer
 {
@@ -88,18 +86,11 @@ declare function gpxquery:trk-distance($gpx as element(gpx:gpx))
     as xsd:float*
 {
     for $trk in 1 to count($gpx/gpx:trk)
-        return sum(gpxquery:trk-distance-recurse($gpx/gpx:trk[$trk]/gpx:trkseg/gpx:trkpt))
-};
-
-declare function gpxquery:trk-distance-recurse($trkpts as element(gpx:trkpt)*)
-    as xsd:float*
-{
-    if ( count($trkpts) le 1 )
-      then 0
-      else (
-          gpxquery:haversine($trkpts[1]/@lat, $trkpts[1]/@lon, $trkpts[2]/@lat, $trkpts[2]/@lon) ,
-          gpxquery:trk-distance-recurse($trkpts[position() gt 1])
-      )
+    let $trkpts := $gpx/gpx:trk[$trk]/gpx:trkseg/gpx:trkpt
+    return sum(
+        for $i in 1 to count($trkpts)-1
+        return gpxquery:haversine($trkpts[$i]/@lat, $trkpts[$i]/@lon, $trkpts[$i+1]/@lat, $trkpts[$i+1]/@lon)
+    )
 };
 
 declare function gpxquery:haversine($lat1 as xsd:float, $lon1 as xsd:float, $lat2 as xsd:float, $lon2 as xsd:float)
@@ -112,5 +103,5 @@ declare function gpxquery:haversine($lat1 as xsd:float, $lon1 as xsd:float, $lat
     let $rlat2 := $lat2 * math:pi() div 180
     let $a     := math:sin($dlat div 2) * math:sin($dlat div 2) + math:sin($dlon div 2) * math:sin($dlon div 2) * math:cos($rlat1) * math:cos($rlat2)
     let $c     := 2 * math:atan2(math:sqrt($a), math:sqrt(1-$a))
-    return xsd:float($c * $gpxquery:earth-radius)
+    return xsd:float($c * 6371000.0)
 };
