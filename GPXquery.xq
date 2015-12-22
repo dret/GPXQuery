@@ -105,6 +105,7 @@ declare function gpxquery:trk-distance-recurse($trkpts as element(gpx:trkpt)*)
 declare function gpxquery:distance-between-points($lat1 as xsd:float, $lon1 as xsd:float, $lat2 as xsd:float, $lon2 as xsd:float)
     as xsd:float
 {
+    (: This is the Haversine formula as described by http://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates :)
     let $dlat  := ($lat2 - $lat1) * math:pi() div 180
     let $dlon  := ($lon2 - $lon1) * math:pi() div 180
     let $rlat1 := $lat1 * math:pi() div 180
