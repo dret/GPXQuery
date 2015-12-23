@@ -20,6 +20,18 @@ declare function gpxquery:trk-count($gpx as element(gpx:gpx))
 
 (: 
    in:  GPX document, using the GPX 1.1 schema/namespace and passed via the gpx:gpx element.
+   out: Sequence of number of track segments per track, one value for each track.
+:)
+declare function gpxquery:trk-segments($gpx as element(gpx:gpx))
+    as xsd:integer*
+{
+    for $trk in 1 to count($gpx/gpx:trk)
+    return count($gpx/gpx:trk[$trk]/gpx:trkseg)
+};
+
+
+(: 
+   in:  GPX document, using the GPX 1.1 schema/namespace and passed via the gpx:gpx element.
    out: Sequence of names of tracks as strings, as many values as there are tracks.
 :)
 declare function gpxquery:trk-names($gpx as element(gpx:gpx))
@@ -28,13 +40,6 @@ declare function gpxquery:trk-names($gpx as element(gpx:gpx))
     $gpx/gpx:trk/gpx:name/text()
 };
 
-
-declare function gpxquery:trk-segments($gpx as element(gpx:gpx))
-    as xsd:integer*
-{
-    for $trk in 1 to count($gpx/gpx:trk)
-    return count($gpx/gpx:trk[$trk]/gpx:trkseg)
-};
 
 declare function gpxquery:trk-points($gpx as element(gpx:gpx))
     as xsd:integer*
