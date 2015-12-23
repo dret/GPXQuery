@@ -6,17 +6,28 @@ declare namespace math = "http://www.w3.org/2005/xpath-functions/math";
 declare namespace gpx = "http://www.topografix.com/GPX/1/1";
 declare namespace gpxtpx = "http://www.garmin.com/xmlschemas/TrackPointExtension/v1";
 
+
+(: 
+   in:  GPX document, using the GPX 1.1 schema/namespace and passed via the gpx:gpx element.
+   out: Number of tracks contained in the GPX document (*not* the number of track segments).
+:)
 declare function gpxquery:trk-count($gpx as element(gpx:gpx))
     as xsd:integer
 {
     count($gpx/gpx:trk)
 };
 
+
+(: 
+   in:  GPX document, using the GPX 1.1 schema/namespace and passed via the gpx:gpx element.
+   out: Sequence of names of tracks as strings, as many values as there are tracks.
+:)
 declare function gpxquery:trk-names($gpx as element(gpx:gpx))
     as xsd:string*
 {
     $gpx/gpx:trk/gpx:name/text()
 };
+
 
 declare function gpxquery:trk-segments($gpx as element(gpx:gpx))
     as xsd:integer*
