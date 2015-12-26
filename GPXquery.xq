@@ -6,6 +6,7 @@ declare namespace math = "http://www.w3.org/2005/xpath-functions/math";
 declare namespace gpx = "http://www.topografix.com/GPX/1/1";
 declare namespace gpxtpx = "http://www.garmin.com/xmlschemas/TrackPointExtension/v1";
 
+(: Please keep in mind that all units are metric (for now). There is no option for other units of measurements. :)
 
 (: 
    in:  GPX document, using the GPX 1.1 schema/namespace and passed via the gpx:gpx element.
