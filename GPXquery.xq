@@ -54,6 +54,10 @@ declare function gpxquery:trk-names($gpx as element(gpx:gpx))
 };
 
 
+(: 
+   in:  GPX document, using the GPX 1.1 schema/namespace and passed via the gpx:gpx element.
+   out: Sequence of start/first timestamps of tracks, as many values as there are tracks.
+:)
 declare function gpxquery:trk-start($gpx as element(gpx:gpx))
     as xsd:dateTime*
 {
