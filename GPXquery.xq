@@ -89,6 +89,11 @@ declare function gpxquery:trk-min-elevation($gpx as element(gpx:gpx))
     return min($gpx/gpx:trk[$trk]/gpx:trkseg/gpx:trkpt/gpx:ele/text())
 };
 
+
+(: 
+   in:  GPX document, using the GPX 1.1 schema/namespace and passed via the gpx:gpx element.
+   out: Sequence of maximum elevation of tracks, as many values as there are tracks.
+:)
 declare function gpxquery:trk-max-elevation($gpx as element(gpx:gpx))
     as xsd:double*
 {
