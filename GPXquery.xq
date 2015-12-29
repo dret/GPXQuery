@@ -77,6 +77,11 @@ declare function gpxquery:trk-end($gpx as element(gpx:gpx))
     return $gpx/gpx:trk[$trk]/gpx:trkseg[last()]/gpx:trkpt[last()]/gpx:time/text()
 };
 
+
+(: 
+   in:  GPX document, using the GPX 1.1 schema/namespace and passed via the gpx:gpx element.
+   out: Sequence of minimum elevation of tracks, as many values as there are tracks.
+:)
 declare function gpxquery:trk-min-elevation($gpx as element(gpx:gpx))
     as xsd:double*
 {
