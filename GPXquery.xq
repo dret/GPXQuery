@@ -101,6 +101,7 @@ declare function gpxquery:trk-max-elevation($gpx as element(gpx:gpx))
     return max($gpx/gpx:trk[$trk]/gpx:trkseg/gpx:trkpt/gpx:ele/text())
 };
 
+
 declare function gpxquery:trk-ascent($gpx as element(gpx:gpx))
     as xsd:double*
 {
@@ -112,6 +113,7 @@ declare function gpxquery:trk-ascent($gpx as element(gpx:gpx))
         return if ( $ascend gt 0.0 ) then $ascend else 0.0
     )
 };
+
 
 declare function gpxquery:trk-descent($gpx as element(gpx:gpx))
     as xsd:double*
@@ -125,6 +127,7 @@ declare function gpxquery:trk-descent($gpx as element(gpx:gpx))
     )
 };
 
+
 declare function gpxquery:trk-distance($gpx as element(gpx:gpx))
     as xsd:double*
 {
@@ -135,6 +138,7 @@ declare function gpxquery:trk-distance($gpx as element(gpx:gpx))
         return gpxquery:haversine($trkpts[$i]/@lat, $trkpts[$i]/@lon, $trkpts[$i+1]/@lat, $trkpts[$i+1]/@lon)
     )
 };
+
 
 declare function gpxquery:haversine($lat1 as xsd:double, $lon1 as xsd:double, $lat2 as xsd:double, $lon2 as xsd:double)
     as xsd:double
@@ -148,6 +152,7 @@ declare function gpxquery:haversine($lat1 as xsd:double, $lon1 as xsd:double, $l
     let $c     := 2 * math:atan2(math:sqrt($a), math:sqrt(1-$a))
     return xsd:double($c * 6371000.0)
 };
+
 
 declare function gpxquery:bbox($gpx as element(gpx:gpx), $trk as xsd:integer)
     as xsd:double+ (: Return values are 4 xsd:double for the bounding box coordinates, first lat/lon of lower left, then lat/lon of upper right. :)
