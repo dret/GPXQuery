@@ -140,10 +140,13 @@ declare function gpxquery:trk-distance($gpx as element(gpx:gpx))
 };
 
 
+(:
+  in:  Two points in decimal coordinates.
+  out: The distance between the points (in meters) according to the Haversine formula as described by http://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates
+:)
 declare function gpxquery:haversine($lat1 as xsd:double, $lon1 as xsd:double, $lat2 as xsd:double, $lon2 as xsd:double)
     as xsd:double
 {
-    (: This is the Haversine formula as described by http://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates :)
     let $dlat  := ($lat2 - $lat1) * math:pi() div 180
     let $dlon  := ($lon2 - $lon1) * math:pi() div 180
     let $rlat1 := $lat1 * math:pi() div 180
