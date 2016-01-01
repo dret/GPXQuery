@@ -56,7 +56,7 @@ declare function gpxquery:trk-names($gpx as element(gpx:gpx))
 
 (: 
    in:  GPX document, using the GPX 1.1 schema/namespace and passed via the gpx:gpx element.
-   out: Sequence of start/first timestamp of tracks, as many values as there are tracks.
+   out: Sequence of start/first timestamp per track, as many values as there are tracks.
 :)
 declare function gpxquery:trk-start($gpx as element(gpx:gpx))
     as xsd:dateTime*
@@ -68,7 +68,7 @@ declare function gpxquery:trk-start($gpx as element(gpx:gpx))
 
 (: 
    in:  GPX document, using the GPX 1.1 schema/namespace and passed via the gpx:gpx element.
-   out: Sequence of end/last timestamp of tracks, as many values as there are tracks.
+   out: Sequence of end/last timestamp per track, as many values as there are tracks.
 :)
 declare function gpxquery:trk-end($gpx as element(gpx:gpx))
     as xsd:dateTime*
@@ -80,7 +80,7 @@ declare function gpxquery:trk-end($gpx as element(gpx:gpx))
 
 (: 
    in:  GPX document, using the GPX 1.1 schema/namespace and passed via the gpx:gpx element.
-   out: Sequence of minimum elevation of tracks, as many values as there are tracks.
+   out: Sequence of minimum elevation per track, as many values as there are tracks.
 :)
 declare function gpxquery:trk-min-elevation($gpx as element(gpx:gpx))
     as xsd:double*
@@ -92,7 +92,7 @@ declare function gpxquery:trk-min-elevation($gpx as element(gpx:gpx))
 
 (: 
    in:  GPX document, using the GPX 1.1 schema/namespace and passed via the gpx:gpx element.
-   out: Sequence of maximum elevation of tracks, as many values as there are tracks.
+   out: Sequence of maximum elevation per track, as many values as there are tracks.
 :)
 declare function gpxquery:trk-max-elevation($gpx as element(gpx:gpx))
     as xsd:double*
@@ -102,6 +102,10 @@ declare function gpxquery:trk-max-elevation($gpx as element(gpx:gpx))
 };
 
 
+(: 
+   in:  GPX document, using the GPX 1.1 schema/namespace and passed via the gpx:gpx element.
+   out: Sequence of total ascent per track, as many values as there are tracks.
+:)
 declare function gpxquery:trk-ascent($gpx as element(gpx:gpx))
     as xsd:double*
 {
