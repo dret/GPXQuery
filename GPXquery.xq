@@ -165,8 +165,12 @@ declare function gpxquery:haversine($lat1 as xsd:double, $lon1 as xsd:double, $l
 };
 
 
+(:
+  in:  GPX document, using the GPX 1.1 schema/namespace and passed via the gpx:gpx element, and the number of the track for which the bounding box should be returned.
+  out: Return values are 4 xsd:double for the bounding box coordinates, first lat/lon of lower left, then lat/lon of upper right.
+:)
 declare function gpxquery:bbox($gpx as element(gpx:gpx), $trk as xsd:integer)
-    as xsd:double+ (: Return values are 4 xsd:double for the bounding box coordinates, first lat/lon of lower left, then lat/lon of upper right. :)
+    as xsd:double+
 {
     let $trkpts := $gpx/gpx:trk[$trk]/gpx:trkseg/gpx:trkpt
     return (
