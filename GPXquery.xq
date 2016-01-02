@@ -136,6 +136,10 @@ declare function gpxquery:trk-descent($gpx as element(gpx:gpx))
 };
 
 
+(: 
+   in:  GPX document, using the GPX 1.1 schema/namespace and passed via the gpx:gpx element.
+   out: Sequence of total distance per track, as many values as there are tracks.
+:)
 declare function gpxquery:trk-distance($gpx as element(gpx:gpx))
     as xsd:double*
 {
