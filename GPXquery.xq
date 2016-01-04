@@ -21,6 +21,17 @@ declare function gpxquery:trk-count($gpx as element(gpx:gpx))
 
 (: 
    in:  GPX document, using the GPX 1.1 schema/namespace and passed via the gpx:gpx element.
+   out: Sequence of waypoints, returning the original GPX data.
+:)
+declare function gpxquery:waypoints($gpx as element(gpx:gpx))
+    as element(gpx:wpt)*
+{
+    $gpx/gpx:wpt
+};
+
+
+(: 
+   in:  GPX document, using the GPX 1.1 schema/namespace and passed via the gpx:gpx element.
    out: Sequence of number of track segments per track, one value for each track.
 :)
 declare function gpxquery:trk-segments($gpx as element(gpx:gpx))
