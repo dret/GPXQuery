@@ -7,6 +7,10 @@
       <text>Walgreens Store Locator</text>
     </link>
   </wpt>
+  <wpt lat="37.878411" lon="-122.267708">
+    <name>Berkeley Rose School</name>
+    <desc>A small local school inspired by Waldorf education. Started in 2008, it now has a preschool, two kindergartens, and three grades.</desc>
+  </wpt>
   <trk>
     <name>Berkeley Test Walk #1</name>
     <trkseg>
