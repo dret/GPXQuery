@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gpx version="1.1" creator="dret" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd" xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <wpt lat="37.878123" lon="-122.268701">
+    <name>Walgreens</name>
+    <desc>The Walgreens drugstore on Shattuck Avenue. This used to be the "Elephant Pharmacy" before they closed in 2009.</desc>
+    <link href="http://www.walgreens.com/locator/walgreens-1607+shattuck+ave-berkeley-ca-94709/id=13858">
+      <text>Walgreens Store Locator</text>
+    </link>
+  </wpt>
   <trk>
     <name>Berkeley Test Walk #1</name>
     <trkseg>
