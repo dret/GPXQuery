@@ -44,5 +44,14 @@ declare variable $dateTime-format := "[MNn] [D], [Y]; [H]:[m]:[s] [z]";
                 </tr>
             }
         </table>
+        { if ( not(empty(gpxquery:waypoints($GPX))) ) then (
+          <h2>Waypoints</h2> ,
+          <ol> { for $wpt in gpxquery:waypoints($GPX) return
+              <li>
+                <b> { $wpt/gpx:name/text() } </b>
+                { if ( exists($wpt/gpx:desc) ) then ( ": ", $wpt/gpx:desc/text() ) else () }
+              </li> }
+          </ol> )
+        else () }
     </body>
 </html>
