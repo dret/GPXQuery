@@ -23,7 +23,7 @@ declare variable $dateTime-format := "[MNn] [D], [Y]; [H]:[m]:[s] [z]";
                 <th>Min. Elevation (m)/<br/>Max. Elevation (m)</th>
                 <th>Start Time</th>
                 <th>End Time</th>
-                <th>Duration</th>
+                <th>Total Time</th>
                 <th>Bounding Box</th>
             </tr>
             { for $trk in 1 to gpxquery:trk-count($GPX) return
