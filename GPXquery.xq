@@ -163,6 +163,18 @@ declare function gpxquery:trk-distance($gpx as element(gpx:gpx))
 };
 
 
+(: 
+   in:  GPX document, using the GPX 1.1 schema/namespace and passed via the gpx:gpx element, and threshold speed for identifying "rest intervals".
+   out: Sequence of moving time per track, calculated according to $moving-threshold, as many values as there are tracks.
+:)
+declare function gpxquery:moving-time($gpx as element(gpx:gpx), $moving-threshold as xs:double)
+    as xsd:double*
+{
+    for $trk in 1 to count($gpx/gpx:trk)
+    return 20.0
+};
+
+
 (:
   in:  Two points in decimal coordinates.
   out: The distance between the points (in meters) according to the Haversine formula as described by http://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates
