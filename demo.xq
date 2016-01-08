@@ -11,8 +11,9 @@ declare variable $moving-threshold := 5.0 ;
 declare function gpxquery-demo:format-duration($duration as xs:duration)
     as xs:string
 {
-    xs:string($duration)
+    fn:format-time(xs:dayTimeDuration($duration) + xs:time("00:00:00Z"), "[H1]h [m1]m [s1]s")
 } ;
+
 
 <html>
     <head>
