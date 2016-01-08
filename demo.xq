@@ -1,11 +1,18 @@
-import module namespace gpxquery = "https://github.com/dret/GPXQuery" at "GPXQuery.xq";
+import module namespace gpxquery = "https://github.com/dret/GPXQuery" at "GPXQuery.xq" ;
 
-declare namespace xsd = "http://www.w3.org/2001/XMLSchema";
-declare namespace gpx = "http://www.topografix.com/GPX/1/1";
+declare namespace gpxquery-demo = "https://github.com/dret/GPXQuery-demo" ;
+declare namespace xsd           = "http://www.w3.org/2001/XMLSchema" ;
+declare namespace gpx           = "http://www.topografix.com/GPX/1/1" ;
 
 declare variable $GPX := doc('demo.gpx')/gpx:gpx ;
 declare variable $dateTime-format := "[MNn] [D], [Y]; [H]:[m]:[s] [z]" ;
 declare variable $moving-threshold := 5.0 ;
+
+declare function gpxquery-demo:format-duration($duration as xs:duration)
+    as xs:string
+{
+    xs:string($duration)
+} ;
 
 <html>
     <head>
@@ -38,8 +45,8 @@ declare variable $moving-threshold := 5.0 ;
                     <td> { xsd:int(gpxquery:trk-min-elevation($GPX)[$trk]) } / { xsd:int(gpxquery:trk-max-elevation($GPX)[$trk]) } </td>
                     <td> { fn:format-dateTime(gpxquery:trk-start($GPX)[$trk], $dateTime-format) } </td>
                     <td> { fn:format-dateTime(  gpxquery:trk-end($GPX)[$trk], $dateTime-format) } </td>
-                    <td> { gpxquery:trk-end($GPX)[$trk] - gpxquery:trk-start($GPX)[$trk] } </td>
-                    <td> { gpxquery:moving-time($GPX, $moving-threshold)[$trk] } </td>
+                    <td> { gpxquery-demo:format-duration(gpxquery:trk-end($GPX)[$trk] - gpxquery:trk-start($GPX)[$trk]) } </td>
+                    <td> { gpxquery-demo:format-duration(gpxquery:moving-time($GPX, $moving-threshold)[$trk]) } </td>
                     <td> { let $bbox := gpxquery:bbox($GPX, $trk) return
                            <a href="http://mvjantzen.com/tools/map.php?width=900&amp;height=600&amp;top={$bbox[1]}&amp;left={$bbox[2]}&amp;bottom={$bbox[3]}&amp;right={$bbox[4]}" title="{$bbox}">Map</a>
                          }

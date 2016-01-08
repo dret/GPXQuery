@@ -168,10 +168,10 @@ declare function gpxquery:trk-distance($gpx as element(gpx:gpx))
    out: Sequence of moving time per track, calculated according to $moving-threshold, as many values as there are tracks.
 :)
 declare function gpxquery:moving-time($gpx as element(gpx:gpx), $moving-threshold as xs:double)
-    as xsd:double*
+    as xsd:duration*
 {
     for $trk in 1 to count($gpx/gpx:trk)
-    return 20.0
+    return xs:duration("PT1S")
 };
 
 
