@@ -21,7 +21,8 @@ declare function gpxquery-demo:format-duration($duration as xs:duration)
         <style>th, td {{ padding: 5px; border: 1px solid gray ; }} </style>
     </head>
     <body>
-        <h1>GPXQuery Demo: GPX Track Information</h1>
+        <h1>GPXQuery Demo</h1>
+        <h2>GPX Track Information</h2>
         <table>
             <tr>
                 <th>Nr.</th>
@@ -33,7 +34,7 @@ declare function gpxquery-demo:format-duration($duration as xs:duration)
                 <th>Start Time</th>
                 <th>End Time</th>
                 <th>Total Time</th>
-                <th>Moving Time<br/>({ $moving-threshold } km/h speed threshold)</th>
+                <th>Moving Time<br/>({ $moving-threshold } km/h threshold)</th>
                 <th>Bounding Box</th>
             </tr>
             { for $trk in 1 to gpxquery:trk-count($GPX) return
@@ -56,13 +57,13 @@ declare function gpxquery-demo:format-duration($duration as xs:duration)
             }
         </table>
         { if ( not(empty(gpxquery:waypoints($GPX))) ) then (
-          <h2>Waypoints</h2> ,
-          <ol> { for $wpt in gpxquery:waypoints($GPX) return
-              <li>
-                <b> { $wpt/gpx:name/text() } </b>
-                { if ( exists($wpt/gpx:desc) ) then ( ": ", $wpt/gpx:desc/text() ) else () }
-              </li> }
-          </ol> )
+            <h2>Waypoints</h2> ,
+            <ol> { for $wpt in gpxquery:waypoints($GPX) return
+                <li>
+                  <b> { $wpt/gpx:name/text() } </b>
+                  { if ( exists($wpt/gpx:desc) ) then ( ": ", $wpt/gpx:desc/text() ) else () }
+                </li> }
+            </ol> )
         else () }
     </body>
 </html>
