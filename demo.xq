@@ -33,7 +33,7 @@ declare function gpxquery-demo:format-duration($duration as xs:duration)
                 <th>Start Time</th>
                 <th>End Time</th>
                 <th>Total Time</th>
-                <th>Moving Time<br/>({ $moving-threshold } km/h) speed threshold</th>
+                <th>Moving Time<br/>({ $moving-threshold } km/h speed threshold)</th>
                 <th>Bounding Box</th>
             </tr>
             { for $trk in 1 to gpxquery:trk-count($GPX) return
