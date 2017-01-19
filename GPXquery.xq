@@ -124,8 +124,8 @@ declare function gpxquery:trk-ascent($gpx as element(gpx:gpx))
     let $eles := $gpx/gpx:trk[$trk]/gpx:trkseg/gpx:trkpt/gpx:ele/text()
     return sum(
         for $i in 1 to count($eles)-1
-        let $ascend := $eles[$i+1]-$eles[$i]
-        return if ( $ascend gt 0.0 ) then $ascend else 0.0
+        let $ascent := $eles[$i+1]-$eles[$i]
+        return if ( $ascent gt 0.0 ) then $ascent else 0.0
     )
 };
 
@@ -141,8 +141,8 @@ declare function gpxquery:trk-descent($gpx as element(gpx:gpx))
     let $eles := $gpx/gpx:trk[$trk]/gpx:trkseg/gpx:trkpt/gpx:ele/text()
     return sum(
         for $i in 1 to count($eles)-1
-        let $descend := $eles[$i]-$eles[$i+1]
-        return if ( $descend gt 0.0 ) then $descend else 0.0
+        let $descent := $eles[$i]-$eles[$i+1]
+        return if ( $descent gt 0.0 ) then $descent else 0.0
     )
 };
 
